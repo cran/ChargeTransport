@@ -111,9 +111,11 @@ KMC <- function(cl, con, rates, dx, dy, dz, type = "BKL", nSimu = 10, nHops = 1e
     return(OUT)
   }
 
-  loc <- system.file(package="ChargeTransport")
-  lib <- file.path(loc, "libs",paste("ChargeTransport",.Platform$dynlib.ext, sep=""))
-  clusterCall(cl, dyn.load, lib)
+  clusterCall(cl, library.dynam, chname="ChargeTransport", package="ChargeTransport", lib.loc=.libPaths())
+  
+#   loc <- system.file(package="ChargeTransport")
+#   lib <- file.path(loc, "libs",paste("ChargeTransport",.Platform$dynlib.ext, sep=""))
+#   clusterCall(cl, dyn.load, lib)
 #   clusterCall(cl, dyn.load, "/home/jide/Dev/R/Packages/ChargeTransport/1.0/src/BKL.so")
 #   clusterCall(cl, dyn.load, "/home/jide/Dev/R/Packages/ChargeTransport/1.0/src/FRM.so")
 
