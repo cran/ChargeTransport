@@ -1,0 +1,3 @@
+import(parallel)
+useDynLib("ChargeTransport")
+exportPattern("^[[:alpha:]]+")
