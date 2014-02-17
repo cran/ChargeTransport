@@ -16,7 +16,7 @@ KMC <- function(cl, con, rates, dx, dy, dz, type = "BKL", nSimu = 10, nHops = 1e
     warning("'rates' is a list. Only the first element has been used")
     rates <- rates[[1]]
   }
-  if(    is.vector(rates)) rates <- t(as.matrix(rates))
+  if(is.null(dim(rates)) ) rates <- t(as.matrix(rates))
   if(is.data.frame(rates)) rates <-   as.matrix(rates)
   if(!is.matrix(rates)) stop("'rates' must be a matrix or a data.frame")
   
@@ -24,7 +24,7 @@ KMC <- function(cl, con, rates, dx, dy, dz, type = "BKL", nSimu = 10, nHops = 1e
     warning("'dx' is a list. Only the first element has been used")
     dx <- dx[[1]]
   }
-  if(    is.vector(dx)) dx <- t(as.matrix(dx))
+  if(is.null(dim(dx)) ) dx <- t(as.matrix(dx))
   if(is.data.frame(dx)) dx <-   as.matrix(dx)
   if(!is.matrix(dx)) stop("'dx' must be a matrix or a data.frame")
   
@@ -32,7 +32,7 @@ KMC <- function(cl, con, rates, dx, dy, dz, type = "BKL", nSimu = 10, nHops = 1e
     warning("'dy' is a list. Only the first element has been used")
     dy <- dy[[1]]
   }
-  if(    is.vector(dy)) dy <- t(as.matrix(dy))
+  if(is.null(dim(dy)) ) dy <- t(as.matrix(dy))
   if(is.data.frame(dy)) dy <-   as.matrix(dy)
   if(!is.matrix(dy)) stop("'dy' must be a matrix or a data.frame")
   
@@ -40,7 +40,7 @@ KMC <- function(cl, con, rates, dx, dy, dz, type = "BKL", nSimu = 10, nHops = 1e
     warning("'dz' is a list. Only the first element has been used")
     dz <- dz[[1]]
   }
-  if(    is.vector(dz)) dz <- t(as.matrix(dz))
+  if(is.null(dim(dz)) ) dz <- t(as.matrix(dz))
   if(is.data.frame(dz)) dz <-   as.matrix(dz)
   if(!is.matrix(dz)) stop("'dz' must be a matrix or a data.frame")
   
@@ -53,9 +53,7 @@ KMC <- function(cl, con, rates, dx, dy, dz, type = "BKL", nSimu = 10, nHops = 1e
   if(nrow(con) != ncol(rates))
     stop("'con' and rates mismatch: nrow(con) != ncol(rates)")
   if(is.data.frame(con))
-    con <- as.matrix(data.frame)
-  if(!is.numeric(con))
-    stop("'con' must be numeric")
+    con <- as.matrix(con)
   
   if(!(type%in%c("BKL","FRM")))
     stop("Unrecognized type of simulation. 'type' must be equal to 'BKL' or 'FRM'")
